@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat
+  labels:
+    estado: "desarrollo"
+    responsable: "juan"
+spec:
+  containers:
+  {{/*
+    Comentario helm
+      #  {{ $alet := .Values.service.port}}
+      #  - name: tomcat1-{{$alet}}
+  */}}
+   {{ $version := "9.0"}}
+   - name: tomcat1-hola
+   {{ if eq .Values.image.repository "nginx"}}
+     image: tomcat:{{.Values.service.port}}     
+   {{else}}     
+     image: tomcat:111
+   {{end}}

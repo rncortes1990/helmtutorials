@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: departamentos
+  labels:
+    name: departamento1
+data:
+  departamentos: |-
+   {{- range .Values.departamentos }}
+   - {{ . }}
+   {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-departamentos
+  labels:
+    name: departamento1
+data:
+  departamentos: |-
+   {{- range .Values.departamentitos }}
+   - nombre: {{ .name }}
+     valor:  {{ .value }}
+   {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-departamentos-3
+  labels:
+    name: departamento1
+data:
+  departamentos: |-
+   {{- with .Values.departamentitos }}
+    {{ range .}}
+       {{.}}
+    {{end}}
+   {{- end }}
